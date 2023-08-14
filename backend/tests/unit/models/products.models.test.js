@@ -7,7 +7,7 @@ const {
   getAllProductsFromModel,
   getProductByIdFromDB,
   getProductByIdFromModel,
-} = require('../mocks/user.models.mocks');
+} = require('../mocks/models/user.models.mocks');
 
 // mocks
 

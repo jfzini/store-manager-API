@@ -4,7 +4,10 @@ const { ProductsServices } = require('../../../src/services');
 const { ProductsModels } = require('../../../src/models');
 
 // mocks
-const { getAllProductsFromModel, getProductByIdFromModel } = require('../mocks/user.models.mocks');
+const {
+  getAllProductsFromModel,
+  getProductByIdFromModel,
+} = require('../mocks/models/user.models.mocks');
 
 describe('Products Services unit tests', function () {
   afterEach(function () {
