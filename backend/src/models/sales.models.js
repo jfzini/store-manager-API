@@ -1,6 +1,6 @@
 const camelize = require('camelize');
 const connection = require('../configs/connection');
-const queries = require('./queries/queries');
+const queries = require('./utils/queries');
 
 const getAllSales = async () => {
   const [sales] = await connection.execute(queries.getAllSalesQuery);
