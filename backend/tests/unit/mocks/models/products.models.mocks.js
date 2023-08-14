@@ -45,9 +45,32 @@ const getProductByIdFromModel = {
   name: 'Martelo de Thor',
 };
 
+const createProductFromDB = [
+  {
+    fieldCount: 0,
+    affectedRows: 1,
+    insertId: 4,
+    info: '',
+    serverStatus: 2,
+    warningStatus: 0,
+  },
+  undefined,
+];
+
+const createProductFromModel = {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 4,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0,
+};
+
 module.exports = {
   getAllProductsFromDB,
   getAllProductsFromModel,
   getProductByIdFromDB,
   getProductByIdFromModel,
+  createProductFromDB,
+  createProductFromModel,
 };
