@@ -1,5 +1,5 @@
-const { SalesModels } = require('../models');
 const snakeize = require('snakeize');
+const { SalesModels } = require('../models');
 
 const getAllSales = async () => {
   const salesModel = await SalesModels.getAllSales();
@@ -21,8 +21,8 @@ const getSaleById = async (id) => {
 const createSale = async (saleArr) => {
   const saleId = await SalesModels.insertSale(new Date());
   const saleData = saleArr.map((sale) => ({ saleId, ...sale }));
-  const insertedSale = await SalesModels.createSale(snakeize(saleData));
-  return { id: saleId, itemsSold: saleArr};
+  await SalesModels.createSale(snakeize(saleData));
+  return { id: saleId, itemsSold: saleArr };
 };
 
 module.exports = {

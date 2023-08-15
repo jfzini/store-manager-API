@@ -14,14 +14,14 @@ const getSaleById = async (id) => {
 };
 
 const insertSale = async (date) => {
-  const [result] = await connection.execute(`INSERT INTO sales (date) VALUES (?)`, [date]);
+  const [result] = await connection.execute('INSERT INTO sales (date) VALUES (?)', [date]);
   return result.insertId;
 };
 
 const createSale = async (saleData) => {
   const eachSaleData = [];
   saleData.forEach((sale) => {
-    const values = Object.values(sale).forEach((value) => {
+    Object.values(sale).forEach((value) => {
       eachSaleData.push(value);
     });
   });

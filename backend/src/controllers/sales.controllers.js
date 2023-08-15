@@ -18,9 +18,15 @@ const createSale = async (req, res) => {
   const salesData = req.body;
   try {
     const sale = await SalesServices.createSale(salesData);
-    res.status(201).json(sale);
+    return res.status(201).json(sale);
   } catch (error) {
-    res.status(400).json({ message: 'Failed to create sale. Review your data and make sure its correct', error: error.message })
+    if (error.message.includes('FOREIGN KEY (`product_id`)')) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    return res.status(422).json({
+      message: 'Failed to create sale. Review your data and make sure its correct',
+      error: error.message,
+    });
   }
 };
 
