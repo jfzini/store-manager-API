@@ -44,7 +44,7 @@ describe('Sales Middlewares unit tests', function () {
     expect(res.status).to.have.been.calledWith(422);
   });
 
-  it("validateCreateSaleBody should respond status 422 if req.body isn't an array", function () {
+  it('validateCreateSaleBody should respond status 422 if req.body isn\'t an array', function () {
     const req = {
       body: {
         product: 'Teste',

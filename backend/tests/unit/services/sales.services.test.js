@@ -7,8 +7,14 @@ const { SalesModels } = require('../../../src/models');
 const {
   getAllSalesFromModel,
   getSaleByIdFromModel,
+  createSaleFromModel,
 } = require('../mocks/models/sales.models.mocks');
-const { getAllSalesFromService, getSaleByIdFromService } = require('../mocks/services/sales.services.mocks');
+const {
+  getAllSalesFromService,
+  getSaleByIdFromService,
+  createdSaleFromService,
+} = require('../mocks/services/sales.services.mocks');
+const { createSuccessfulSaleBodyMock } = require('../mocks/utils/middlewares.utils.mocks');
 
 describe('Sales Services unit tests', function () {
   afterEach(function () {
@@ -28,5 +34,13 @@ describe('Sales Services unit tests', function () {
     const sale = await SalesServices.getSaleById(1);
     expect(sale).to.be.an('array');
     expect(sale).to.deep.equal(getSaleByIdFromService);
+  });
+
+  it('createSale should return an object with the created sale data', async function () {
+    sinon.stub(SalesModels, 'insertSale').resolves(4);
+    sinon.stub(SalesModels, 'createSale').resolves(createSaleFromModel);
+    const createdSale = await SalesServices.createSale(createSuccessfulSaleBodyMock);
+    expect(createdSale).to.be.an('object');
+    expect(createdSale).to.deep.equal(createdSaleFromService);
   });
 });

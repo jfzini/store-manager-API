@@ -12,6 +12,7 @@ const {
   NaNQuantityBodyMock,
   zeroQuantityBodyMock,
 } = require('../mocks/utils/middlewares.utils.mocks');
+
 const { expect } = chai;
 
 describe('Test Middlewares utilitary functions', function () {

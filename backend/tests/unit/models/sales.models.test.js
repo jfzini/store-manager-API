@@ -4,7 +4,16 @@ const { SalesModels } = require('../../../src/models');
 const connection = require('../../../src/configs/connection');
 
 // mocks
-const { getAllSalesFromDB, getAllSalesFromModel, getSaleByIdFromDB, getSaleByIdFromModel, insertSaleInDB, createSaleFromDB, saleDataMock, createSaleFromModel } = require('../mocks/models/sales.models.mocks');
+const {
+  getAllSalesFromDB,
+  getAllSalesFromModel,
+  getSaleByIdFromDB,
+  getSaleByIdFromModel,
+  insertSaleInDB,
+  createSaleFromDB,
+  saleDataMock,
+  createSaleFromModel,
+} = require('../mocks/models/sales.models.mocks');
 
 describe('Sales Models unit tests', function () {
   afterEach(function () {
@@ -39,5 +48,4 @@ describe('Sales Models unit tests', function () {
     expect(sale).to.be.an('object');
     expect(sale).to.deep.equal(createSaleFromModel);
   });
-
 });
