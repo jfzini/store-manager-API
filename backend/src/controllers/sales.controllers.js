@@ -14,7 +14,18 @@ const getSaleById = async (req, res) => {
   return res.status(404).json({ message: 'Sale not found' });
 };
 
+const createSale = async (req, res) => {
+  const salesData = req.body;
+  try {
+    const sale = await SalesServices.createSale(salesData);
+    res.status(201).json(sale);
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to create sale. Review your data and make sure its correct', error: error.message })
+  }
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
+  createSale,
 };
