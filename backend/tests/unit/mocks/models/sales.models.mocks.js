@@ -86,9 +86,59 @@ const getSaleByIdFromModel = [
   },
 ];
 
+const insertSaleInDB = [
+  {
+    fieldCount: 0,
+    affectedRows: 1,
+    insertId: 3,
+    info: '',
+    serverStatus: 2,
+    warningStatus: 0,
+  },
+  undefined,
+];
+
+const createSaleFromDB = [
+  {
+    fieldCount: 0,
+    affectedRows: 2,
+    insertId: 0,
+    info: 'Records: 2  Duplicates: 0  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+  },
+  undefined,
+];
+
+const createSaleFromModel = {
+  fieldCount: 0,
+  affectedRows: 2,
+  insertId: 0,
+  info: 'Records: 2  Duplicates: 0  Warnings: 0',
+  serverStatus: 2,
+  warningStatus: 0,
+};
+
+const saleDataMock = [
+  {
+    sale_id: 1,
+    product_id: 1,
+    quantity: 5,
+  },
+  {
+    sale_id: 1,
+    product_id: 2,
+    quantity: 10,
+  },
+];
+
 module.exports = {
   getAllSalesFromDB,
   getAllSalesFromModel,
   getSaleByIdFromDB,
   getSaleByIdFromModel,
+  insertSaleInDB,
+  createSaleFromDB,
+  createSaleFromModel,
+  saleDataMock,
 };

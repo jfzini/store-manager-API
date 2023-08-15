@@ -1,12 +1,9 @@
-const productIdExists = (body) => body.every(({ productId }) => productId);
-
-const productQuantityExists = (body) => body.every(({ quantity }) => quantity !== undefined);
-
-const productQuantityIsNumber = (body) =>
-  body.every(({ quantity }) => !Number.isNaN(parseInt(quantity, 10)));
-
-const productQuantityIsGreaterThanZero = (body) =>
-  body.every(({ quantity }) => parseInt(quantity, 10) > 0);
+const {
+  productIdExists,
+  productQuantityExists,
+  productQuantityIsNumber,
+  productQuantityIsGreaterThanZero,
+} = require('./utils/middlewares.utils');
 
 const validateCreateSaleBody = (req, res, next) => {
   const { body } = req;

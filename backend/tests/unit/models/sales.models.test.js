@@ -4,7 +4,7 @@ const { SalesModels } = require('../../../src/models');
 const connection = require('../../../src/configs/connection');
 
 // mocks
-const { getAllSalesFromDB, getAllSalesFromModel, getSaleByIdFromDB, getSaleByIdFromModel } = require('../mocks/models/sales.models.mocks');
+const { getAllSalesFromDB, getAllSalesFromModel, getSaleByIdFromDB, getSaleByIdFromModel, insertSaleInDB, createSaleFromDB, saleDataMock, createSaleFromModel } = require('../mocks/models/sales.models.mocks');
 
 describe('Sales Models unit tests', function () {
   afterEach(function () {
@@ -26,4 +26,18 @@ describe('Sales Models unit tests', function () {
     expect(sale).to.have.lengthOf(2);
     expect(sale).to.deep.equal(getSaleByIdFromModel);
   });
+
+  it('insertSale should return the id of the inserted sale', async function () {
+    sinon.stub(connection, 'execute').resolves(insertSaleInDB);
+    const sale = await SalesModels.insertSale('2023-08-14T20:24:15.000Z');
+    expect(sale).to.be.equal(insertSaleInDB[0].insertId);
+  });
+
+  it('createSale should return an object with the insertion data', async function () {
+    sinon.stub(connection, 'execute').resolves(createSaleFromDB);
+    const sale = await SalesModels.createSale(saleDataMock);
+    expect(sale).to.be.an('object');
+    expect(sale).to.deep.equal(createSaleFromModel);
+  });
+
 });
