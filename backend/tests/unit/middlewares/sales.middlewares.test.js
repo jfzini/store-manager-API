@@ -106,13 +106,14 @@ describe('Sales Middlewares unit tests', function () {
     };
     const res = {
       status: sinon.stub().returnsThis(),
-      json: sinon.stub(),
+      json: sinon.stub().returns({ message: '"quantity" is required' }),
     };
     const next = sinon.stub().returns();
 
     validateProductQuantity(req, res, next);
 
     expect(res.status).to.have.been.calledWith(400);
+    expect(res.json).to.have.been.calledWith({ message: '"quantity" is required' });
   });
 
   it('validateProductQuantity should respond status 400 if "quantity" isn\'t a number in every object in the array', function () {
@@ -121,13 +122,14 @@ describe('Sales Middlewares unit tests', function () {
     };
     const res = {
       status: sinon.stub().returnsThis(),
-      json: sinon.stub(),
+      json: sinon.stub().returns({ message: '"quantity" must be a number' }),
     };
     const next = sinon.stub().returns();
 
     validateProductQuantity(req, res, next);
 
     expect(res.status).to.have.been.calledWith(400);
+    expect(res.json).to.have.been.calledWith({ message: '"quantity" must be a number' });
   });
 
   it('validateProductQuantity should respond status 422 if "quantity" isn\'t greater than zero in every object in the array', function () {
@@ -136,12 +138,13 @@ describe('Sales Middlewares unit tests', function () {
     };
     const res = {
       status: sinon.stub().returnsThis(),
-      json: sinon.stub(),
+      json: sinon.stub().returns({ message: '"quantity" must be greater than or equal to 1' }),
     };
     const next = sinon.stub().returns();
 
     validateProductQuantity(req, res, next);
 
     expect(res.status).to.have.been.calledWith(422);
+    expect(res.json).to.have.been.calledWith({ message: '"quantity" must be greater than or equal to 1' });
   });
 });

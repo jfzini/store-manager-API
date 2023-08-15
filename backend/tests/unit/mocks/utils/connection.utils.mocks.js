@@ -8,7 +8,10 @@ const insertArrMock = [
   { name: 'Test Product 3', quantity: 3 },
 ];
 
-const returnInsertManyMock = 'INSERT INTO products (name, quantity) VALUES (?, ?), (?, ?), (?, ?)';
+const returnInsertManyMock = [
+  'INSERT INTO products (name, quantity) VALUES (?, ?), (?, ?), (?, ?)',
+  ['Test Product 1', 1, 'Test Product 2', 2, 'Test Product 3', 3],
+];
 
 module.exports = {
   insertObjMock,

@@ -12,7 +12,13 @@ const insertMany = (table, data) => {
     .map((_key) => '?')
     .join(', ');
   const values = data.map((_data) => `(${placeholders})`).join(', ');
-  return `INSERT INTO ${table} (${columns}) VALUES ${values}`;
+  const eachSaleData = [];
+  data.forEach((sale) => {
+    Object.values(sale).forEach((value) => {
+      eachSaleData.push(value);
+    });
+  });
+  return [`INSERT INTO ${table} (${columns}) VALUES ${values}`, eachSaleData];
 };
 
 module.exports = {

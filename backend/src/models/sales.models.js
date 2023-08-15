@@ -19,13 +19,7 @@ const insertSale = async (date) => {
 };
 
 const createSale = async (saleData) => {
-  const eachSaleData = [];
-  saleData.forEach((sale) => {
-    Object.values(sale).forEach((value) => {
-      eachSaleData.push(value);
-    });
-  });
-  const [result] = await connection.execute(insertMany('sales_products', saleData), eachSaleData);
+  const [result] = await connection.execute(...insertMany('sales_products', saleData));
   return result;
 };
 

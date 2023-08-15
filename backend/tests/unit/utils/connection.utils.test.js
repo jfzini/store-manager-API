@@ -14,7 +14,7 @@ describe('Test Connection utilitary functions', function () {
     expect(insert('products', insertObjMock)).to.be.equal(returnInsertMock);
   });
 
-  it('"insertMany" should return the correct string', function () {
-    expect(insertMany('products', insertArrMock)).to.be.equal(returnInsertManyMock);
+  it('"insertMany" should return the correct array', function () {
+    expect(insertMany('products', insertArrMock)).to.deep.equal(returnInsertManyMock);
   });
 });

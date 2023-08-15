@@ -58,7 +58,7 @@ describe('Sales Controllers unit tests', function () {
   it('createSale should be sucessful', async function () {
     sinon.stub(SalesServices, 'createSale').resolves(createdSaleFromService);
     const req = {
-      body: createSuccessfulSaleBodyMock
+      body: createSuccessfulSaleBodyMock,
     };
     const res = {
       status: sinon.stub().returnsThis(),
@@ -72,7 +72,7 @@ describe('Sales Controllers unit tests', function () {
     const error = new Error('FOREIGN KEY (`product_id`)');
     sinon.stub(SalesServices, 'createSale').throws(error);
     const req = {
-      body: {}
+      body: {},
     };
     const res = {
       status: sinon.stub().returnsThis(),
@@ -86,7 +86,7 @@ describe('Sales Controllers unit tests', function () {
     const error = new Error('Some weird error');
     sinon.stub(SalesServices, 'createSale').throws(error);
     const req = {
-      body: {}
+      body: {},
     };
     const res = {
       status: sinon.stub().returnsThis(),
