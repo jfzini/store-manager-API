@@ -39,9 +39,25 @@ const deleteSale = async (req, res) => {
   return res.status(NO_CONTENT).end();
 };
 
+const updateSaleQuantity = async (req, res) => {
+  const { saleId, productId } = req.params;
+  const { quantity } = req.body;
+  const sale = await SalesServices.getSaleById(saleId);
+  const product = await ProductsServices.getProductById(productId);
+  if (sale.length === 0) {
+    return res.status(NOT_FOUND).json({ message: 'Sale not found' });
+  }
+  if (!product) {
+    return res.status(NOT_FOUND).json({ message: 'Product not found in sale' });
+  }
+  const updatedSale = await SalesServices.updateSaleQuantity(saleId, productId, quantity);
+  return res.status(OK).json(updatedSale);
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
   createSale,
   deleteSale,
+  updateSaleQuantity,
 };

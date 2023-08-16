@@ -134,6 +134,50 @@ const saleDataMock = [
   },
 ];
 
+const deleteSaleFromDB = [
+  {
+    fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: '',
+    serverStatus: 2,
+    warningStatus: 0,
+  },
+  undefined,
+];
+
+const deleteSaleFromModel = {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 0,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0,
+};
+
+const updateSaleQuantityFromDB = [
+  {
+    fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+    serverStatus: 2,
+    warningStatus: 0,
+    changedRows: 1,
+  },
+  undefined,
+];
+
+const updateSaleQuantityFromModel = {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 0,
+  info: 'Rows matched: 1  Changed: 1  Warnings: 0',
+  serverStatus: 2,
+  warningStatus: 0,
+  changedRows: 1,
+};
+
 module.exports = {
   getAllSalesFromDB,
   getAllSalesFromModel,
@@ -143,4 +187,8 @@ module.exports = {
   createSaleFromDB,
   createSaleFromModel,
   saleDataMock,
+  deleteSaleFromDB,
+  deleteSaleFromModel,
+  updateSaleQuantityFromDB,
+  updateSaleQuantityFromModel,
 };

@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
+
 const { SalesModels } = require('../../../src/models');
 const connection = require('../../../src/configs/connection');
 
@@ -13,6 +14,10 @@ const {
   createSaleFromDB,
   saleDataMock,
   createSaleFromModel,
+  deleteSaleFromDB,
+  deleteSaleFromModel,
+  updateSaleQuantityFromDB,
+  updateSaleQuantityFromModel,
 } = require('../mocks/models/sales.models.mocks');
 
 describe('Sales Models unit tests', function () {
@@ -47,5 +52,19 @@ describe('Sales Models unit tests', function () {
     const sale = await SalesModels.createSale(saleDataMock);
     expect(sale).to.be.an('object');
     expect(sale).to.deep.equal(createSaleFromModel);
+  });
+
+  it('deleteSale should return an object with the deletion data', async function () {
+    sinon.stub(connection, 'execute').resolves(deleteSaleFromDB);
+    const sale = await SalesModels.deleteSale(1);
+    expect(sale).to.be.an('object');
+    expect(sale).to.deep.equal(deleteSaleFromModel);
+  });
+
+  it('updateSaleQuantity should return an object with the deletion data', async function () {
+    sinon.stub(connection, 'execute').resolves(updateSaleQuantityFromDB);
+    const sale = await SalesModels.updateSaleQuantity(1, 2, 30);
+    expect(sale).to.be.an('object');
+    expect(sale).to.deep.equal(updateSaleQuantityFromModel);
   });
 });

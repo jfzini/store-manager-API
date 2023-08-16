@@ -47,4 +47,8 @@ const validateProductQuantity = (req, res, next) => {
   next();
 };
 
-module.exports = [validateCreateSaleBody, validateProductId, validateProductQuantity];
+module.exports = [
+  validateCreateSaleBody,
+  validateProductId,
+  validateProductQuantity,
+];
