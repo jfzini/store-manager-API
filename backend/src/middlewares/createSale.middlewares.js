@@ -8,7 +8,7 @@ const {
 
 const validateCreateSaleBody = (req, res, next) => {
   const { body } = req;
-  if (!body || !Array.isArray(body)) {
+  if (!Array.isArray(body)) {
     return res
       .status(UNPROCESSABLE_ENTITY)
       .json({ message: 'req.body must be an array of objects' });
