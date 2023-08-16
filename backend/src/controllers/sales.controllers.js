@@ -1,5 +1,5 @@
 const { SalesServices, ProductsServices } = require('../services');
-const { OK, NOT_FOUND, CREATED } = require('../utils/statusHTTP');
+const { OK, NOT_FOUND, CREATED, NO_CONTENT } = require('../utils/statusHTTP');
 
 const getAllSales = async (req, res) => {
   const sales = await SalesServices.getAllSales();
@@ -29,8 +29,19 @@ const createSale = async (req, res) => {
   return res.status(NOT_FOUND).json({ message: 'Product not found' });
 };
 
+const deleteSale = async (req, res) => {
+  const { id } = req.params;
+  const foundSale = await SalesServices.getSaleById(id);
+  if (foundSale.length === 0) {
+    return res.status(NOT_FOUND).json({ message: 'Sale not found' });
+  }
+  await SalesServices.deleteSale(id);
+  return res.status(NO_CONTENT).end();
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
   createSale,
+  deleteSale,
 };

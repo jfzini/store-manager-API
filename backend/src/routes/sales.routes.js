@@ -11,5 +11,6 @@ const salesRouter = express.Router();
 salesRouter.get('/', SalesControllers.getAllSales);
 salesRouter.get('/:id', SalesControllers.getSaleById);
 salesRouter.post('/', SalesMiddlewares, SalesControllers.createSale);
+salesRouter.delete('/:id', SalesControllers.deleteSale);
 
 module.exports = salesRouter;
