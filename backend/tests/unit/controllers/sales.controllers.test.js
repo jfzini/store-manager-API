@@ -1,6 +1,7 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
+
 const { SalesServices, ProductsServices } = require('../../../src/services');
 const {
   getAllSalesFromService,
