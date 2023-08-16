@@ -11,6 +11,8 @@ const {
   createProductFromModel,
   updateProductFromDB,
   updateProductFromModel,
+  deleteProductFromDB,
+  deleteProductFromModel,
 } = require('../mocks/models/products.models.mocks');
 
 // mocks
@@ -49,5 +51,12 @@ describe('Products Models unit tests', function () {
     const productCreated = await productsModels.updateProduct(1, productObj);
     expect(productCreated).to.be.an('object');
     expect(productCreated).to.deep.equal(updateProductFromModel);
+  });
+
+  it('deleteProduct should update a product and return it', async function () {
+    sinon.stub(connection, 'execute').resolves(deleteProductFromDB);
+    const productCreated = await productsModels.deleteProduct(1);
+    expect(productCreated).to.be.an('object');
+    expect(productCreated).to.deep.equal(deleteProductFromModel);
   });
 });

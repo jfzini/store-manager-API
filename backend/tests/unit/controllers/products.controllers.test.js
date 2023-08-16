@@ -95,4 +95,32 @@ describe('Products Controllers unit tests', function () {
     await ProductsControllers.updateProduct(req, res);
     expect(res.status).to.have.been.calledWith(404);
   });
+
+  it('deleteProduct should be successful', async function () {
+    sinon.stub(ProductsServices, 'getProductById').resolves(getProductByIdFromModel);
+    sinon.stub(ProductsServices, 'deleteProduct').resolves();
+    const req = {
+      params: { id: '1' },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      end: sinon.stub(),
+    };
+    await ProductsControllers.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+  });
+
+  it('deleteProduct should NOT be successful if productId doesn\'t exist in DB', async function () {
+    sinon.stub(ProductsServices, 'getProductById').resolves(undefined);
+    sinon.stub(ProductsServices, 'deleteProduct').resolves();
+    const req = {
+      params: { id: '1' },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    await ProductsControllers.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledWith(404);
+  });
 });

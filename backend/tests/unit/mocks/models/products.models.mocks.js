@@ -89,6 +89,27 @@ const updateProductFromModel = {
   changedRows: 1,
 };
 
+const deleteProductFromDB = [
+  {
+    fieldCount: 0,
+    affectedRows: 1,
+    insertId: 0,
+    info: '',
+    serverStatus: 2,
+    warningStatus: 0,
+  },
+  undefined,
+];
+
+const deleteProductFromModel = {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 0,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0,
+};
+
 module.exports = {
   getAllProductsFromDB,
   getAllProductsFromModel,
@@ -98,4 +119,6 @@ module.exports = {
   createProductFromModel,
   updateProductFromDB,
   updateProductFromModel,
+  deleteProductFromDB,
+  deleteProductFromModel,
 };

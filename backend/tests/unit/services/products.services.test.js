@@ -46,4 +46,11 @@ describe('Products Services unit tests', function () {
     expect(product).to.be.an('object');
     expect(product).to.deep.equal(updateProductFromService);
   });
+
+  it('deleteProduct should return an object with the product', async function () {
+    const stubedDeleteModel = sinon.stub(ProductsModels, 'deleteProduct');
+    stubedDeleteModel.resolves();
+    await ProductsServices.deleteProduct(1);
+    expect(stubedDeleteModel.calledOnce).to.be.equal(true);
+  });
 });
