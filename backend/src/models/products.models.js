@@ -17,26 +17,13 @@ const createProduct = async (product) => {
 };
 
 const updateProduct = async (id, product) => {
-  const [result] = await connection.execute(
-    'UPDATE products SET name = ? WHERE id = ?',
-    [...Object.values(product), id],
-  );
+  const [result] = await connection.execute('UPDATE products SET name = ? WHERE id = ?', [
+    ...Object.values(product),
+    id,
+  ]);
 
   return result;
 };
-
-// [
-//   {
-//     "fieldCount": 0,
-//     "affectedRows": 1,
-//     "insertId": 0,
-//     "info": "Rows matched: 1  Changed: 1  Warnings: 0",
-//     "serverStatus": 2,
-//     "warningStatus": 0,
-//     "changedRows": 1
-//   },
-//   null
-// ]
 
 module.exports = {
   getAllProducts,

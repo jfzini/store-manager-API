@@ -8,8 +8,9 @@ const {
   getAllProductsFromModel,
   getProductByIdFromModel,
   createProductFromModel,
+  updateProductFromModel,
 } = require('../mocks/models/products.models.mocks');
-const { createProductFromService } = require('../mocks/services/products.services.mocks');
+const { createProductFromService, updateProductFromService } = require('../mocks/services/products.services.mocks');
 
 describe('Products Services unit tests', function () {
   afterEach(function () {
@@ -36,5 +37,13 @@ describe('Products Services unit tests', function () {
     const product = await ProductsServices.createProduct(productObj);
     expect(product).to.be.an('object');
     expect(product).to.deep.equal(createProductFromService);
+  });
+
+  it('updateProduct should return an object with the product', async function () {
+    sinon.stub(ProductsModels, 'updateProduct').resolves(updateProductFromModel);
+    const productObj = { name: 'Updated Test Product' };
+    const product = await ProductsServices.updateProduct(1, productObj);
+    expect(product).to.be.an('object');
+    expect(product).to.deep.equal(updateProductFromService);
   });
 });

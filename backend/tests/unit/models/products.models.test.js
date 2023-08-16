@@ -9,6 +9,8 @@ const {
   getProductByIdFromModel,
   createProductFromDB,
   createProductFromModel,
+  updateProductFromDB,
+  updateProductFromModel,
 } = require('../mocks/models/products.models.mocks');
 
 // mocks
@@ -39,5 +41,13 @@ describe('Products Models unit tests', function () {
     const productCreated = await productsModels.createProduct(productObj);
     expect(productCreated).to.be.an('object');
     expect(productCreated).to.deep.equal(createProductFromModel);
+  });
+
+  it('updateProduct should update a product and return it', async function () {
+    sinon.stub(connection, 'execute').resolves(updateProductFromDB);
+    const productObj = { name: 'Updated Test Product' };
+    const productCreated = await productsModels.updateProduct(1, productObj);
+    expect(productCreated).to.be.an('object');
+    expect(productCreated).to.deep.equal(updateProductFromModel);
   });
 });

@@ -7,7 +7,7 @@ const {
   getProductByIdFromModel,
 } = require('../mocks/models/products.models.mocks');
 const { ProductsControllers } = require('../../../src/controllers');
-const { createProductFromService } = require('../mocks/services/products.services.mocks');
+const { createProductFromService, updateProductFromService } = require('../mocks/services/products.services.mocks');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -64,5 +64,35 @@ describe('Products Controllers unit tests', function () {
     };
     await ProductsControllers.createProduct(req, res);
     expect(res.status).to.have.been.calledWith(201);
+  });
+
+  it('updateProduct should be successful', async function () {
+    sinon.stub(ProductsServices, 'getProductById').resolves(getProductByIdFromModel);
+    sinon.stub(ProductsServices, 'updateProduct').resolves(updateProductFromService);
+    const req = {
+      body: { name: 'Updated Test Product' },
+      params: { id: '1' },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    await ProductsControllers.updateProduct(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+  });
+
+  it('updateProduct should NOT be successful if productId doesn\'t exist in DB', async function () {
+    sinon.stub(ProductsServices, 'getProductById').resolves(undefined);
+    sinon.stub(ProductsServices, 'updateProduct').resolves(updateProductFromService);
+    const req = {
+      body: { name: 'Updated Test Product' },
+      params: { id: '9999' },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    await ProductsControllers.updateProduct(req, res);
+    expect(res.status).to.have.been.calledWith(404);
   });
 });

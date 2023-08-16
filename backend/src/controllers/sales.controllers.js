@@ -1,4 +1,4 @@
-const { SalesServices } = require('../services');
+const { SalesServices, ProductsServices } = require('../services');
 
 const getAllSales = async (req, res) => {
   const sales = await SalesServices.getAllSales();
@@ -16,18 +16,16 @@ const getSaleById = async (req, res) => {
 
 const createSale = async (req, res) => {
   const salesData = req.body;
-  try {
+  const productsFound = await Promise.all(
+    salesData.map(async ({ productId }) => ProductsServices.getProductById(productId)),
+  );
+  const productsValid = productsFound.every((product) => product !== undefined);
+
+  if (productsValid) {
     const sale = await SalesServices.createSale(salesData);
     return res.status(201).json(sale);
-  } catch (error) {
-    if (error.message.includes('FOREIGN KEY (`product_id`)')) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-    return res.status(422).json({
-      message: 'Failed to create sale. Review your data and make sure its correct',
-      error: error.message,
-    });
   }
+  return res.status(404).json({ message: 'Product not found' });
 };
 
 module.exports = {
