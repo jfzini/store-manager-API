@@ -37,6 +37,7 @@ describe('Products Middlewares unit tests', function () {
     validateCreateProduct(req, res, next);
 
     expect(res.status).to.have.been.calledWith(400);
+    expect(res.json).to.have.been.calledWith({ message: '"name" is required' });
   });
 
   it('validateCreateProduct should respond status 422 if req.body.name has less than 5 chars', function () {
@@ -54,5 +55,6 @@ describe('Products Middlewares unit tests', function () {
     validateCreateProduct(req, res, next);
 
     expect(res.status).to.have.been.calledWith(422);
+    expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' });
   });
 });

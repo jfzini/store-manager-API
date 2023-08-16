@@ -3,6 +3,7 @@
   "packageManager": "npm",
   "reporters": ["html", "clear-text", "json", "progress"],
   "mutate": ["src/**/*.js", "!src/{app,server}.js"],
+  "ignorePatterns": ["tests/integration"],
   "mutator": {
     "excludedMutations": [
       "StringLiteral",

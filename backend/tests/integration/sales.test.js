@@ -30,6 +30,9 @@ chai.use(sinonChai);
 chai.use(chaiHttp);
 
 describe('/sales methods should work as intended', function () {
+  const genericEndpoint = '/sales';
+  const idEndpoint = '/sales/1';
+
   describe('GET endpoints', function () {
     afterEach(async function () {
       sinon.restore();
@@ -37,7 +40,7 @@ describe('/sales methods should work as intended', function () {
 
     it('GET / should return an array with all sales', async function () {
       sinon.stub(connection, 'execute').resolves(getAllSalesFromDB);
-      const response = await chai.request(app).get('/sales');
+      const response = await chai.request(app).get(genericEndpoint);
       expect(response).to.have.status(200);
       expect(response.body).to.be.an('array');
       expect(response.body).to.deep.equal(getAllSalesFromService);
@@ -45,7 +48,7 @@ describe('/sales methods should work as intended', function () {
 
     it('GET /:id should return an array with the respective sale\'s data', async function () {
       sinon.stub(connection, 'execute').resolves(getSaleByIdFromDB);
-      const response = await chai.request(app).get('/sales/1');
+      const response = await chai.request(app).get(idEndpoint);
       expect(response).to.have.status(200);
       expect(response.body).to.be.an('array');
       expect(response.body).to.deep.equal(getSaleByIdFromService);
@@ -53,7 +56,7 @@ describe('/sales methods should work as intended', function () {
 
     it('GET /:id should return an error if the sale doesn\'t exist in the database', async function () {
       sinon.stub(connection, 'execute').resolves([[], null]);
-      const response = await chai.request(app).get('/sales/1');
+      const response = await chai.request(app).get(idEndpoint);
       expect(response).to.have.status(404);
       expect(response.body).to.be.an('object');
       expect(response.body).to.deep.equal({ message: 'Sale not found' });
@@ -77,7 +80,7 @@ describe('/sales methods should work as intended', function () {
         .resolves(insertSaleInDB)
         .onCall(3)
         .resolves(createSaleFromDB);
-      const response = await chai.request(app).post('/sales').send(createSuccessfulSaleBodyMock);
+      const response = await chai.request(app).post(genericEndpoint).send(createSuccessfulSaleBodyMock);
       expect(response).to.have.status(201);
       expect(response.body).to.be.an('object');
       expect(response.body).to.deep.equal({ id: 3, itemsSold: createSuccessfulSaleBodyMock });
@@ -85,32 +88,32 @@ describe('/sales methods should work as intended', function () {
 
     it('POST / should return an error if some productId doesn\'t exist in the database', async function () {
       sinon.stub(Promise, 'all').resolves([getProductByIdFromModel, undefined]);
-      const response = await chai.request(app).post('/sales').send(createSuccessfulSaleBodyMock);
+      const response = await chai.request(app).post(genericEndpoint).send(createSuccessfulSaleBodyMock);
       expect(response).to.have.status(404);
       expect(response.body).to.be.an('object');
       expect(response.body).to.deep.equal({ message: 'Product not found' });
     });
 
     it('POST / should return an error if req.body doesn\'t have a "productId" property on all objects', async function () {
-      const response = await chai.request(app).post('/sales').send(missingProductIdBodyMock);
+      const response = await chai.request(app).post(genericEndpoint).send(missingProductIdBodyMock);
       expect(response).to.have.status(400);
       expect(response.body).to.deep.equal({ message: '"productId" is required' });
     });
 
     it('POST / should return an error if req.body doesn\'t have a "quantity" property on all objects', async function () {
-      const response = await chai.request(app).post('/sales').send(missingQuantityBodyMock);
+      const response = await chai.request(app).post(genericEndpoint).send(missingQuantityBodyMock);
       expect(response).to.have.status(400);
       expect(response.body).to.deep.equal({ message: '"quantity" is required' });
     });
 
     it('POST / should return an error if "quantity" property isn\'t a number on all objects', async function () {
-      const response = await chai.request(app).post('/sales').send(NaNQuantityBodyMock);
+      const response = await chai.request(app).post(genericEndpoint).send(NaNQuantityBodyMock);
       expect(response).to.have.status(400);
       expect(response.body).to.deep.equal({ message: '"quantity" must be a number' });
     });
 
     it('POST / should return an error if "quantity" isn\'t greater than or equal to 1', async function () {
-      const response = await chai.request(app).post('/sales').send(zeroQuantityBodyMock);
+      const response = await chai.request(app).post(genericEndpoint).send(zeroQuantityBodyMock);
       expect(response).to.have.status(422);
       expect(response.body).to.deep.equal({
         message: '"quantity" must be greater than or equal to 1',

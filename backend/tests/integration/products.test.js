@@ -23,7 +23,7 @@ chai.use(chaiHttp);
 describe('/products methods should work as intented', function () {
   const fullNameProduct = { name: 'Teste' };
   const shortNameProduct = { name: 'Test' };
-  const generalEndpoint = '/products';
+  const genericEndpoint = '/products';
   const idEndpoint = '/products/1';
 
   describe('GET endpoints', function () {
@@ -33,7 +33,7 @@ describe('/products methods should work as intented', function () {
 
     it('GET / should return an array with all products', async function () {
       sinon.stub(connection, 'execute').resolves(getAllProductsFromDB);
-      const response = await chai.request(app).get(generalEndpoint);
+      const response = await chai.request(app).get(genericEndpoint);
       expect(response).to.have.status(200);
       expect(response.body).to.be.an('array');
       expect(response.body).to.deep.equal(getAllProductsFromModel);
@@ -64,7 +64,7 @@ describe('/products methods should work as intented', function () {
     it('POST / should return an object with the created product', async function () {
       sinon.stub(connection, 'execute').resolves(createProductFromDB);
       const productObj = fullNameProduct;
-      const response = await chai.request(app).post(generalEndpoint).send(productObj);
+      const response = await chai.request(app).post(genericEndpoint).send(productObj);
       expect(response).to.have.status(201);
       expect(response.body).to.be.an('object');
       expect(response.body).to.deep.equal({ id: 4, name: 'Teste' });
@@ -72,7 +72,7 @@ describe('/products methods should work as intented', function () {
 
     it('POST / should return an error if the req body doesn\'t have a name property', async function () {
       const productObj = {};
-      const response = await chai.request(app).post(generalEndpoint).send(productObj);
+      const response = await chai.request(app).post(genericEndpoint).send(productObj);
       expect(response).to.have.status(400);
       expect(response.body).to.be.an('object');
       expect(response.body).to.deep.equal({ message: '"name" is required' });
@@ -80,7 +80,7 @@ describe('/products methods should work as intented', function () {
 
     it('POST / should return an error if the req body "name" is shorter than 5 chars', async function () {
       const productObj = shortNameProduct;
-      const response = await chai.request(app).post(generalEndpoint).send(productObj);
+      const response = await chai.request(app).post(genericEndpoint).send(productObj);
       expect(response).to.have.status(422);
       expect(response.body).to.be.an('object');
       expect(response.body).to.deep.equal({

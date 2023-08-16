@@ -1,17 +1,18 @@
 const { SalesServices, ProductsServices } = require('../services');
+const { OK, NOT_FOUND, CREATED } = require('../utils/statusHTTP');
 
 const getAllSales = async (req, res) => {
   const sales = await SalesServices.getAllSales();
-  res.status(200).json(sales);
+  res.status(OK).json(sales);
 };
 
 const getSaleById = async (req, res) => {
   const { id } = req.params;
   const sale = await SalesServices.getSaleById(id);
   if (sale.length > 0) {
-    return res.status(200).json(sale);
+    return res.status(OK).json(sale);
   }
-  return res.status(404).json({ message: 'Sale not found' });
+  return res.status(NOT_FOUND).json({ message: 'Sale not found' });
 };
 
 const createSale = async (req, res) => {
@@ -23,9 +24,9 @@ const createSale = async (req, res) => {
 
   if (productsValid) {
     const sale = await SalesServices.createSale(salesData);
-    return res.status(201).json(sale);
+    return res.status(CREATED).json(sale);
   }
-  return res.status(404).json({ message: 'Product not found' });
+  return res.status(NOT_FOUND).json({ message: 'Product not found' });
 };
 
 module.exports = {
