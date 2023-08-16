@@ -22,9 +22,14 @@ const updateProduct = async (id, product) => {
   return updatedProduct;
 };
 
+const deleteProduct = async (id) => {
+  await ProductsModels.deleteProduct(id);
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
   updateProduct,
+  deleteProduct,
 };

@@ -21,13 +21,29 @@ const updateProduct = async (id, product) => {
     ...Object.values(product),
     id,
   ]);
-
   return result;
 };
+
+const deleteProduct = async (id) => {
+  await connection.execute('DELETE FROM products WHERE id = ?', [id]);
+};
+
+// [
+//   ResultSetHeader {
+//     fieldCount: 0,
+//     affectedRows: 1,
+//     insertId: 0,
+//     info: '',
+//     serverStatus: 2,
+//     warningStatus: 0
+//   },
+//   undefined
+// ]
 
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
   updateProduct,
+  deleteProduct,
 };
