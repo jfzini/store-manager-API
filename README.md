@@ -6,6 +6,14 @@ ___
 
 * Versão do node: 16+
 
+___
+
+## 📝 Documentação da API
+
+A documentação desta API está disponível nest link: [Documentação da API](https://documenter.getpostman.com/view/29177531/2s9Y5R3SWC)
+
+___
+
 ## 🧑‍💻 Habilidades Desenvolvidas
 
   * Criar uma API usando `Express`;
@@ -79,12 +87,6 @@ Para rodar o projeto utilizando docker, no diretório da aplicação execute o c
 Para acompanhar os logs do container do servidor backend, com nodemon já em execução:
 
 `docker logs -n 10 -f store_manager`
-
-___
-
-## 📝 Documentação da API
-
-A documentação desta API está disponível nest link: [Documentação da API](https://documenter.getpostman.com/view/29177531/2s9Y5R3SWC)
 
 ___
 
