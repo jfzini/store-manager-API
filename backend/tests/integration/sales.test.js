@@ -181,5 +181,43 @@ describe('/sales methods should work as intended', function () {
       expect(response.body).to.be.an('object');
       expect(response.body).to.deep.equal({ message: 'Product not found in sale' });
     });
+
+    it('PUT /sales/:saleId/products/:productId/quantity should return an error if quantity is not a property of req.body', async function () {
+      this.clock = sinon.useFakeTimers({
+        now: new Date('2023-08-14T20:24:15.000Z'),
+      });
+      sinon
+        .stub(connection, 'execute')
+        .onCall(0)
+        .resolves(getSaleByIdFromDB)
+        .onCall(1)
+        .resolves(getProductByIdFromDB)
+        .onCall(2)
+        .resolves(updateSaleQuantityFromDB);
+
+      const response = await chai.request(app).put(putQntEndpoint).send({ quantities: 30 });
+      expect(response).to.have.status(400);
+      expect(response.body).to.be.an('object');
+      expect(response.body).to.deep.equal({ message: '"quantity" is required' });
+    });
+
+    it('PUT /sales/:saleId/products/:productId/quantity should return an error if quantity is not a number', async function () {
+      this.clock = sinon.useFakeTimers({
+        now: new Date('2023-08-14T20:24:15.000Z'),
+      });
+      sinon
+        .stub(connection, 'execute')
+        .onCall(0)
+        .resolves(getSaleByIdFromDB)
+        .onCall(1)
+        .resolves(getProductByIdFromDB)
+        .onCall(2)
+        .resolves(updateSaleQuantityFromDB);
+
+      const response = await chai.request(app).put(putQntEndpoint).send({ quantity: 'string' });
+      expect(response).to.have.status(400);
+      expect(response.body).to.be.an('object');
+      expect(response.body).to.deep.equal({ message: '"quantity" must be a number' });
+    });
   });
 });
