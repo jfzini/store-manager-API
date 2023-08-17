@@ -1,10 +1,8 @@
-const marteloDeThor = 'Martelo de Thor';
-
 const getAllProductsFromDB = [
   [
     {
       id: 1,
-      name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
+      name: 'Martelo de Thor',
     },
     {
       id: 2,
@@ -21,7 +19,7 @@ const getAllProductsFromDB = [
 const getAllProductsFromModel = [
   {
     id: 1,
-    name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
+    name: 'Martelo de Thor',
   },
   {
     id: 2,
@@ -37,14 +35,14 @@ const getProductByIdFromDB = [
   [
     {
       id: 1,
-      name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
+      name: 'Martelo de Thor',
     },
   ],
 ];
 
 const getProductByIdFromModel = {
   id: 1,
-  name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
+  name: 'Martelo de Thor',
 };
 
 const createProductFromDB = [
@@ -116,7 +114,7 @@ const searchProductFromDB = [
   [
     {
       id: 1,
-      name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
+      name: 'Martelo de Thor',
     },
   ],
   undefined,
@@ -125,7 +123,7 @@ const searchProductFromDB = [
 const searchProductFromModel = [
   {
     id: 1,
-    name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
+    name: 'Martelo de Thor',
   },
 ];
 

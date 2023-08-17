@@ -1,20 +1,18 @@
-const mockDate = '2023-08-14T20:24:15.000Z';
-
 const getAllSalesFromService = [
   {
-    date: mockDate, // THIS MUST BE CHANGED BACK TO STRING AFTER PROJECT IS DONE
+    date: '2023-08-14T20:24:15.000Z',
     saleId: 1,
     productId: 1,
     quantity: 5,
   },
   {
-    date: mockDate, // THIS MUST BE CHANGED BACK TO STRING AFTER PROJECT IS DONE
+    date: '2023-08-14T20:24:15.000Z',
     saleId: 1,
     productId: 2,
     quantity: 10,
   },
   {
-    date: mockDate, // THIS MUST BE CHANGED BACK TO STRING AFTER PROJECT IS DONE
+    date: '2023-08-14T20:24:15.000Z',
     saleId: 2,
     productId: 3,
     quantity: 15,
@@ -23,12 +21,12 @@ const getAllSalesFromService = [
 
 const getSaleByIdFromService = [
   {
-    date: mockDate, // THIS MUST BE CHANGED BACK TO STRING AFTER PROJECT IS DONE
+    date: '2023-08-14T20:24:15.000Z',
     productId: 1,
     quantity: 5,
   },
   {
-    date: mockDate, // THIS MUST BE CHANGED BACK TO STRING AFTER PROJECT IS DONE
+    date: '2023-08-14T20:24:15.000Z',
     productId: 2,
     quantity: 10,
   },

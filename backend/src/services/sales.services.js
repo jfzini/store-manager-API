@@ -31,12 +31,13 @@ const deleteSale = async (id) => {
 
 const updateSaleQuantity = async (saleId, productId, quantity) => {
   await SalesModels.updateSaleQuantity(saleId, productId, quantity);
-  return {
+  const saleData = {
     date: new Date(),
     productId: parseInt(productId, 10),
     quantity,
     saleId: parseInt(saleId, 10),
   };
+  return saleData;
 };
 
 module.exports = {
