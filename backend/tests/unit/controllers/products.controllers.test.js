@@ -5,6 +5,7 @@ const { ProductsServices } = require('../../../src/services');
 const {
   getAllProductsFromModel,
   getProductByIdFromModel,
+  searchProductFromModel,
 } = require('../mocks/models/products.models.mocks');
 const { ProductsControllers } = require('../../../src/controllers');
 const { createProductFromService, updateProductFromService } = require('../mocks/services/products.services.mocks');
@@ -122,5 +123,19 @@ describe('Products Controllers unit tests', function () {
     };
     await ProductsControllers.deleteProduct(req, res);
     expect(res.status).to.have.been.calledWith(404);
+  });
+
+  it('searchProduct should return the result of the query search', async function () {
+    sinon.stub(ProductsServices, 'searchProduct').resolves(searchProductFromModel);
+    const req = {
+      query: { q: 'artelo' },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    await ProductsControllers.searchProduct(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(searchProductFromModel);
   });
 });

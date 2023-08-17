@@ -1,8 +1,10 @@
+const marteloDeThor = 'Martelo de Thor';
+
 const getAllProductsFromDB = [
   [
     {
       id: 1,
-      name: 'Martelo de Thor',
+      name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
     },
     {
       id: 2,
@@ -19,7 +21,7 @@ const getAllProductsFromDB = [
 const getAllProductsFromModel = [
   {
     id: 1,
-    name: 'Martelo de Thor',
+    name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
   },
   {
     id: 2,
@@ -35,14 +37,14 @@ const getProductByIdFromDB = [
   [
     {
       id: 1,
-      name: 'Martelo de Thor',
+      name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
     },
   ],
 ];
 
 const getProductByIdFromModel = {
   id: 1,
-  name: 'Martelo de Thor',
+  name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
 };
 
 const createProductFromDB = [
@@ -110,6 +112,23 @@ const deleteProductFromModel = {
   warningStatus: 0,
 };
 
+const searchProductFromDB = [
+  [
+    {
+      id: 1,
+      name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
+    },
+  ],
+  undefined,
+];
+
+const searchProductFromModel = [
+  {
+    id: 1,
+    name: marteloDeThor, // NEED TO CHANGE THIS BACK TO STRING AFTER PROJECT IS DONE
+  },
+];
+
 module.exports = {
   getAllProductsFromDB,
   getAllProductsFromModel,
@@ -121,4 +140,6 @@ module.exports = {
   updateProductFromModel,
   deleteProductFromDB,
   deleteProductFromModel,
+  searchProductFromDB,
+  searchProductFromModel,
 };

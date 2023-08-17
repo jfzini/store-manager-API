@@ -9,6 +9,7 @@ const {
   getProductByIdFromModel,
   createProductFromModel,
   updateProductFromModel,
+  searchProductFromModel,
 } = require('../mocks/models/products.models.mocks');
 const { createProductFromService, updateProductFromService } = require('../mocks/services/products.services.mocks');
 
@@ -52,5 +53,11 @@ describe('Products Services unit tests', function () {
     stubedDeleteModel.resolves();
     await ProductsServices.deleteProduct(1);
     expect(stubedDeleteModel.calledOnce).to.be.equal(true);
+  });
+
+  it('searchProduct should return an array with the found products', async function () {
+    sinon.stub(ProductsModels, 'searchProduct').resolves(searchProductFromModel);
+    const foundProducts = await ProductsServices.searchProduct('artelo');
+    expect(foundProducts).to.deep.equal(searchProductFromModel);
   });
 });

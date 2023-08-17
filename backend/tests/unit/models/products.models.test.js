@@ -13,6 +13,8 @@ const {
   updateProductFromModel,
   deleteProductFromDB,
   deleteProductFromModel,
+  searchProductFromDB,
+  searchProductFromModel,
 } = require('../mocks/models/products.models.mocks');
 
 // mocks
@@ -58,5 +60,12 @@ describe('Products Models unit tests', function () {
     const productCreated = await productsModels.deleteProduct(1);
     expect(productCreated).to.be.an('object');
     expect(productCreated).to.deep.equal(deleteProductFromModel);
+  });
+
+  it('searchProduct should update a product and return it', async function () {
+    sinon.stub(connection, 'execute').resolves(searchProductFromDB);
+    const productCreated = await productsModels.searchProduct('artelo');
+    expect(productCreated).to.be.an('array');
+    expect(productCreated).to.deep.equal(searchProductFromModel);
   });
 });
