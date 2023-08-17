@@ -1,5 +1,11 @@
 O projeto foi criado para colocar em prática a criação de uma API, permitindo a criação, leitura, atualização e destruição (CRUD) dos dados. Para tanto foi utilizado um banco de dados relacional `MySQL`. Outro grande objetivo do projeto é a criação de testes unitários e de integração, com 100% de cobertura de testes, utilizando os frameworks `Mocha`, `Chai`, `Sinon` e `Chai-http`. Para gerar mutações no código e verificar a cobertura de testes, foi utilizado o framework `Stryker`.
 
+___
+
+### ✅ Pré-requisitos
+
+* Versão do node: 16+
+
 ## 🧑‍💻 Habilidades Desenvolvidas
 
   * Criar uma API usando `Express`;
