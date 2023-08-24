@@ -22,7 +22,7 @@ const { expect } = chai;
 chai.use(sinonChai);
 chai.use(chaiHttp);
 
-describe('/products methods should work as intented', function () {
+describe.only('/products methods should work as intented', function () {
   const fullNameProduct = { name: 'Teste' };
   const shortNameProduct = { name: 'Test' };
   const genericEndpoint = '/products';

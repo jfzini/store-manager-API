@@ -1,4 +1,4 @@
-const { ProductsModels } = require('../models');
+const { QueryTypes } = require('sequelize');
 const { Product } = require('../models');
 
 const getAllProducts = async () => {
@@ -7,28 +7,33 @@ const getAllProducts = async () => {
 };
 
 const getProductById = async (id) => {
-  const product = await ProductsModels.getProductById(id);
+  const product = await Product.findByPk(id);
   return product;
 };
 
 const createProduct = async (product) => {
-  const insertResult = await ProductsModels.createProduct(product);
-  const insertedProduct = { id: insertResult.insertId, name: product.name };
-  return insertedProduct;
+  const insertResult = await Product.create(product);
+  return insertResult;
 };
 
 const updateProduct = async (id, product) => {
-  await ProductsModels.updateProduct(id, product);
-  const updatedProduct = { id: parseInt(id, 10), ...product };
+  const [updateStatus] = await Product.update(product, { where: { id } });
+  let updatedProduct;
+  if (updateStatus) {
+    updatedProduct = await Product.findByPk(id);
+  }
   return updatedProduct;
 };
 
 const deleteProduct = async (id) => {
-  await ProductsModels.deleteProduct(id);
+  await Product.destroy({ where: { id } });
 };
 
 const searchProduct = async (name) => {
-  const products = await ProductsModels.searchProduct(name);
+  const products = await Product.sequelize.query(
+    `SELECT * FROM products WHERE name LIKE '%${name}%'`,
+    { type: QueryTypes.SELECT },
+  );
   return products;
 };
 

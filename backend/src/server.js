@@ -1,4 +1,5 @@
 const { Sequelize } = require('sequelize');
+
 const sequelize = new Sequelize({
   dialect: 'mysql',
   username: process.env.MYSQL_USER,
@@ -6,7 +7,7 @@ const sequelize = new Sequelize({
   host: process.env.MYSQL_HOSTNAME,
   port: process.env.MYSQL_PORT,
   database: process.env.MYSQL_DATABASE || 'StoreManager',
-})
+});
 
 sequelize.authenticate()
   .then(() => console.log('Conectado ao banco de dados com sucesso!'))
