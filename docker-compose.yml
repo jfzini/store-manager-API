@@ -5,7 +5,6 @@ services:
     ports:
       - 3001:3001 # porta padrão da aplicação
       - 9229:9229 # porta para debugging
-    command: run dev # roda aplicação com nodemon
     volumes:
       # vincula pasta local com a dentro do container
       - ./backend/src:/app/src
@@ -19,6 +18,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    working_dir: /app/src
+    command: sh -c "npx sequelize db:migrate && npx sequelize db:seed:all && npm run dev"
   db:
     image: mysql:8.0.32
     container_name: store_manager_db
