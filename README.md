@@ -89,6 +89,10 @@ Para acompanhar os logs do container do servidor backend, com nodemon já em exe
 `docker logs -n 10 -f store_manager`
 
 ___
+## 🏗️ WIP
+Atualmente estou trabalhando na refatoração do projeto para utilização do Sequelize como ORM. Para acompanhar os avanços, podem conferir a branch `sequelize-implementation` 
+
+___
 
 ### ⭐️
 
