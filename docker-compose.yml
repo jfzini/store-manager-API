@@ -32,6 +32,6 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
       retries: 5
-    volumes:
-      # adiciona scripts SQL para serem executados ao iniciar a DB
-      - ./sql:/docker-entrypoint-initdb.d
+    # volumes:
+    #   # adiciona scripts SQL para serem executados ao iniciar a DB
+    #   - ./sql:/docker-entrypoint-initdb.d
