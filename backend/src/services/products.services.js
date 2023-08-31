@@ -12,6 +12,9 @@ const getProductById = async (id) => {
 };
 
 const createProduct = async (product) => {
+  const teste = factory.getAllProducts();
+  'teste';
+  console.log(teste);
   const insertResult = await Product.create(product);
   return insertResult;
 };
